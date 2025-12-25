@@ -1,0 +1,12 @@
+services:
+  tetris:
+    build: .
+    container_name: tetris-game
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+      - FLASK_ENV=production
+    command: python app.py

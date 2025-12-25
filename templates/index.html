@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>テトリス ゲーム</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="game-header">
+            <h1>テトリス</h1>
+        </div>
+        
+        <div class="game-content">
+            <div class="game-board" id="gameBoard">
+                <!-- ゲームボードはここに描画されます -->
+            </div>
+            
+            <div class="game-sidebar">
+                <div class="info-panel">
+                    <div class="info-item">
+                        <label>スコア</label>
+                        <div class="info-value" id="score">0</div>
+                    </div>
+                    <div class="info-item">
+                        <label>レベル</label>
+                        <div class="info-value" id="level">1</div>
+                    </div>
+                    <div class="info-item">
+                        <label>ライン</label>
+                        <div class="info-value" id="lines">0</div>
+                    </div>
+                </div>
+                
+                <div class="next-piece-panel">
+                    <label>次のピース</label>
+                    <div class="next-piece" id="nextPiece"></div>
+                </div>
+                
+                <div class="controls">
+                    <button id="startButton" class="btn btn-primary">開始</button>
+                    <button id="pauseButton" class="btn btn-secondary" disabled>一時停止</button>
+                </div>
+                
+                <div class="instructions">
+                    <p><strong>操作方法:</strong></p>
+                    <ul>
+                        <li>← → : 移動</li>
+                        <li>↓ : ソフトドロップ</li>
+                        <li>↑ : 回転</li>
+                        <li>スペース : ハードドロップ</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="game-over" id="gameOverModal" style="display: none;">
+            <div class="modal-content">
+                <h2>ゲームオーバー!</h2>
+                <p>スコア: <span id="finalScore">0</span></p>
+                <button id="retryButton" class="btn btn-primary">もう一度プレイ</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='game.js') }}"></script>
+</body>
+</html>
