@@ -2,19 +2,39 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="テトリス">
+    <meta name="theme-color" content="#667eea">
     <title>テトリス ゲーム</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
         <div class="game-header">
-            <h1>テトリス</h1>
+            <h1>🎮 テトリス</h1>
+            <p class="subtitle">Tetris Game</p>
         </div>
         
         <div class="game-content">
-            <div class="game-board" id="gameBoard">
-                <!-- ゲームボードはここに描画されます -->
+            <div class="game-main">
+                <div class="game-board" id="gameBoard">
+                    <!-- ゲームボードはここに描画されます -->
+                </div>
+                
+                <div class="mobile-controls">
+                    <button class="mobile-btn" id="rotateBtn" title="回転">↻</button>
+                    <div class="mobile-dpad">
+                        <button class="mobile-btn-up" id="upBtn" title="上">▲</button>
+                        <div class="mobile-dpad-row">
+                            <button class="mobile-btn-left" id="leftBtn" title="左">◀</button>
+                            <button class="mobile-btn-down" id="downBtn" title="下">▼</button>
+                            <button class="mobile-btn-right" id="rightBtn" title="右">▶</button>
+                        </div>
+                    </div>
+                    <button class="mobile-btn" id="dropBtn" title="ハードドロップ">⬇</button>
+                </div>
             </div>
             
             <div class="game-sidebar">
@@ -39,27 +59,57 @@
                 </div>
                 
                 <div class="controls">
-                    <button id="startButton" class="btn btn-primary">開始</button>
-                    <button id="pauseButton" class="btn btn-secondary" disabled>一時停止</button>
+                    <button id="startButton" class="btn btn-primary">▶ 開始</button>
+                    <button id="pauseButton" class="btn btn-secondary" disabled>⏸ 一時停止</button>
                 </div>
                 
                 <div class="instructions">
                     <p><strong>操作方法:</strong></p>
-                    <ul>
-                        <li>← → : 移動</li>
-                        <li>↓ : ソフトドロップ</li>
-                        <li>↑ : 回転</li>
-                        <li>スペース : ハードドロップ</li>
-                    </ul>
+                    <div class="instruction-grid">
+                        <div class="instruction-item">
+                            <kbd>← →</kbd>
+                            <span>移動</span>
+                        </div>
+                        <div class="instruction-item">
+                            <kbd>↓</kbd>
+                            <span>下へ</span>
+                        </div>
+                        <div class="instruction-item">
+                            <kbd>↑</kbd>
+                            <span>回転</span>
+                        </div>
+                        <div class="instruction-item">
+                            <kbd>Space</kbd>
+                            <span>ドロップ</span>
+                        </div>
+                        <div class="instruction-item">
+                            <kbd>P</kbd>
+                            <span>一時停止</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         
         <div class="game-over" id="gameOverModal" style="display: none;">
+            <div class="modal-overlay" id="modalOverlay"></div>
             <div class="modal-content">
-                <h2>ゲームオーバー!</h2>
-                <p>スコア: <span id="finalScore">0</span></p>
-                <button id="retryButton" class="btn btn-primary">もう一度プレイ</button>
+                <h2>🎮 ゲームオーバー!</h2>
+                <div class="final-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">スコア</span>
+                        <span class="stat-value" id="finalScore">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">レベル</span>
+                        <span class="stat-value" id="finalLevel">1</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">クリア行</span>
+                        <span class="stat-value" id="finalLines">0</span>
+                    </div>
+                </div>
+                <button id="retryButton" class="btn btn-primary">🔄 もう一度プレイ</button>
             </div>
         </div>
     </div>
